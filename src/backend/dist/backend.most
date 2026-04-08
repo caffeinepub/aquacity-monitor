@@ -1,0 +1,118 @@
+// Version: 1.0.0
+type AreaId__277465265 = AreaId__384767996;
+type AreaId__384767996 = Nat;
+type AreaId__400792461 = AreaId__384767996;
+type AreaId__615059101 = AreaId__384767996;
+type AreaId__756511679 = AreaId__384767996;
+type Area__531303172 =
+  {
+    area_id : AreaId__756511679;
+    area_name : Text;
+    latitude : Float;
+    longitude : Float;
+    population : Nat
+  };
+type DailyReport__615935053 =
+  {
+    area_id : AreaId__400792461;
+    generated_at : Text;
+    reading_count : Nat;
+    report_date : Text;
+    report_id : ReportId__757387501;
+    total_usage : Float
+  };
+type LeakId__649598704 = Nat;
+type LeakId__999067827 = LeakId__649598704;
+type LeakIncident__672532974 =
+  {
+    area_id : AreaId__277465265;
+    latitude : Float;
+    leak_id : LeakId__999067827;
+    leak_severity : Text;
+    longitude : Float;
+    pipe_id : PipeId__509856624;
+    reported_time : Text;
+    resolved_status : Bool
+  };
+type MeterReading__925347660 =
+  {
+    area_id : AreaId__615059101;
+    meter_id : Text;
+    reading_date : Text;
+    reading_id : ReadingId__940220350;
+    reading_value : Float
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type PipeId__129567958 = PipeId__287774830;
+type PipeId__287774830 = Nat;
+type PipeId__509856624 = PipeId__287774830;
+type PipeId__531247325 = PipeId__287774830;
+type PipeNetwork__186581994 =
+  {
+    diameter : Float;
+    end_lat : Float;
+    end_lng : Float;
+    pipe_id : PipeId__531247325;
+    start_lat : Float;
+    start_lng : Float;
+    status : Text
+  };
+type PressureId__714755574 = Nat;
+type PressureId__852203290 = PressureId__714755574;
+type PressureLog__196235953 =
+  {
+    pipe_id : PipeId__129567958;
+    pressure_id : PressureId__852203290;
+    pressure_value : Float;
+    recorded_at : Text
+  };
+type ReadingId__189991750 = Nat;
+type ReadingId__940220350 = ReadingId__189991750;
+type ReportId__327116113 = Nat;
+type ReportId__757387501 = ReportId__327116113;
+actor {
+  stable areas :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Area__531303172]];
+      var elementIndex : Nat__490723111
+    };
+  stable var initialized : Bool;
+  stable leaks :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?LeakIncident__672532974]];
+      var elementIndex : Nat__490723111
+    };
+  stable var nextAreaId : Nat;
+  stable var nextLeakId : Nat;
+  stable var nextPipeId : Nat;
+  stable var nextPressureId : Nat;
+  stable var nextReadingId : Nat;
+  stable var nextReportId : Nat;
+  stable pipes :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?PipeNetwork__186581994]];
+      var elementIndex : Nat__490723111
+    };
+  stable pressureLogs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?PressureLog__196235953]];
+      var elementIndex : Nat__490723111
+    };
+  stable readings :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?MeterReading__925347660]];
+      var elementIndex : Nat__490723111
+    };
+  stable reports :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?DailyReport__615935053]];
+      var elementIndex : Nat__490723111
+    }
+};

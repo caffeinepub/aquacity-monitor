@@ -1,0 +1,24 @@
+{
+  "overview": "AquaCity Monitor is a Smart Water Distribution Monitoring System for Smart City management. It features an admin dashboard with live KPI cards, full CRUD management for water meters, pressure logs, and leak incidents, an interactive map visualizing pipe networks and leak locations, and a manual ETL aggregation tool for daily usage reports.",
+  "features": [
+    "Admin login via Internet Identity",
+    "Live KPI dashboard with usage, pressure, leaks, and shortage risk",
+    "CRUD management for areas, meter readings, pressure logs, and leak incidents",
+    "Interactive map with pipe networks, area boundaries, and severity-coded leak markers",
+    "Manual ETL aggregation for daily usage summaries",
+    "Pre-loaded sample data for immediate demo",
+    "Collapsible sidebar navigation",
+    "Responsive design for mobile and desktop"
+  ],
+  "category": "productivity",
+  "tags": [
+    "smart-city",
+    "water-monitoring",
+    "dashboard",
+    "iot",
+    "analytics",
+    "maps",
+    "academic"
+  ],
+  "last_updated": "2026-04-08T09:08:36.739Z"
+}

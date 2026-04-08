@@ -1,0 +1,107 @@
+type ReportId = nat;
+type ReadingId = nat;
+type PressureLog = 
+ record {
+   pipe_id: PipeId;
+   pressure_id: PressureId;
+   pressure_value: float64;
+   recorded_at: text;
+ };
+type PressureId = nat;
+type PipeNetwork = 
+ record {
+   diameter: float64;
+   end_lat: float64;
+   end_lng: float64;
+   pipe_id: PipeId;
+   start_lat: float64;
+   start_lng: float64;
+   status: text;
+ };
+type PipeId = nat;
+type MeterReading = 
+ record {
+   area_id: AreaId;
+   meter_id: text;
+   reading_date: text;
+   reading_id: ReadingId;
+   reading_value: float64;
+ };
+type LeakIncident = 
+ record {
+   area_id: AreaId;
+   latitude: float64;
+   leak_id: LeakId;
+   leak_severity: text;
+   longitude: float64;
+   pipe_id: PipeId;
+   reported_time: text;
+   resolved_status: bool;
+ };
+type LeakId = nat;
+type DashboardStats = 
+ record {
+   active_leaks: nat;
+   avg_pressure: float64;
+   shortage_risk: bool;
+   today_usage: float64;
+ };
+type DailyReport = 
+ record {
+   area_id: AreaId;
+   generated_at: text;
+   reading_count: nat;
+   report_date: text;
+   report_id: ReportId;
+   total_usage: float64;
+ };
+type AreaId = nat;
+type Area = 
+ record {
+   area_id: AreaId;
+   area_name: text;
+   latitude: float64;
+   longitude: float64;
+   population: nat;
+ };
+service : {
+  addArea: (name: text, population: nat, lat: float64, lng: float64) ->
+   (Area);
+  addLeakIncident: (pipe_id: nat, area_id: nat, severity: text,
+   reported_time: text, resolved: bool, lat: float64, lng: float64) ->
+   (LeakIncident);
+  addMeterReading: (meter_id: text, area_id: nat, value: float64, date:
+   text) -> (MeterReading);
+  addPipe: (start_lat: float64, start_lng: float64, end_lat: float64,
+   end_lng: float64, diameter: float64, status: text) -> (PipeNetwork);
+  addPressureLog: (pipe_id: nat, value: float64, recorded_at: text) ->
+   (PressureLog);
+  deleteArea: (id: nat) -> (bool);
+  deleteLeakIncident: (id: nat) -> (bool);
+  deleteMeterReading: (id: nat) -> (bool);
+  deletePipe: (id: nat) -> (bool);
+  deletePressureLog: (id: nat) -> (bool);
+  getAreas: () -> (vec Area) query;
+  getDailyReports: () -> (vec DailyReport) query;
+  getDashboardStats: () -> (DashboardStats) query;
+  getLeakIncidents: () -> (vec LeakIncident) query;
+  getMeterReadings: () -> (vec MeterReading) query;
+  getMeterReadingsByArea: (area_id: nat) -> (vec MeterReading) query;
+  getPipes: () -> (vec PipeNetwork) query;
+  getPressureLogs: () -> (vec PressureLog) query;
+  getPressureLogsByPipe: (pipe_id: nat) -> (vec PressureLog) query;
+  runDailyAggregation: () -> (nat);
+  toggleLeakResolved: (id: nat) -> (opt LeakIncident);
+  updateArea: (id: nat, name: text, population: nat, lat: float64, lng:
+   float64) -> (opt Area);
+  updateLeakIncident: (id: nat, pipe_id: nat, area_id: nat, severity: 
+   text, reported_time: text, resolved: bool, lat: float64, lng: float64) ->
+   (opt LeakIncident);
+  updateMeterReading: (id: nat, meter_id: text, area_id: nat, value: 
+   float64, date: text) -> (opt MeterReading);
+  updatePipe: (id: nat, start_lat: float64, start_lng: float64, end_lat:
+   float64, end_lng: float64, diameter: float64, status: text) ->
+   (opt PipeNetwork);
+  updatePressureLog: (id: nat, pipe_id: nat, value: float64, recorded_at:
+   text) -> (opt PressureLog);
+}
